@@ -46,7 +46,7 @@ incorporates an EMS memory expansion that's register-compatible with the Lo-Tech
 There are other clones/compatible versions of this board available from various sources.
 Although sold as an "EMS/LIM 4.0" board the hardware of this device is limited solely to
 manipulating 16k pages within a 64k page frame, it is not capable of "mapping" or backfilling
-memory to other regions. This means the hardware us mostly only suitable for programs which
+memory to other regions. This means the hardware is mostly only suitable for programs which
 specifically use EMS memory for data, not for providing upper memory to load DOS and drivers "high".
 
 Despite this there are times where it may be worth sacrificing EMS in order to gain space to free
@@ -62,5 +62,8 @@ location, nor does it do a memory test. Make sure your card works with the norma
 The program directory includes a sample config.sys that shows how to switch between EMS and extra UMB space on boot for DOS
 versions that support config.sys menus.
 
-Code compiled with MASM 6.0 on MS/PC-DOS
+Code compiled with MASM 6.0 on MS/PC-DOS. This code uses the same skeleton as VGAFUDGE that
+allows it to run from either the command line or config.sys; running from command-line may 
+be useful for testing the RAM or making it available for static temporary loading of
+bios extensions/cartridge images/whatever? (Memory should survive a warm reboot if not cleared by another process.)
 
