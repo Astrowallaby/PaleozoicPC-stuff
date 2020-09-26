@@ -1,0 +1,48 @@
+[MENU]
+
+MENUITEM=HIGH,DOS High
+MENUITEM=HUGE,DOS HIGH, EMS as UMB
+MENUITEM=LOW,DOS LOW
+MENUDEFAULT=HIGH, 15
+
+[COMMON]
+FILES=30
+BUFFERS = 30
+drivparm=/d:0 /f:2
+devicehigh=c:\tandy\biosptch.sys
+
+[HIGH]
+DOS=HIGH,UMB
+DOSDATA=UMB
+REM Fixes VGA detection issues
+device=c:\tandy\vgafudge.exe
+REM Enable upper memory and load DOS high
+device=c:\tandy\use!umbs.sys C800-DFFF
+device=c:\tandy\dosmax.exe /P:-
+DEVICEHIGH=C:\DOS\SETVER.EXE
+SHELL=C:\COMMAND.COM C:\ /e:512 /P /H
+devicehigh=c:\dos\ansi.sys
+REM Use EMS card as EMS memory with standard driver
+devicehigh=c:\tandy\ltemm.exe /p:E000
+rem devicehigh=c:\dos\ramdrive.sys 512 /a
+
+[HUGE]
+DOS=HIGH,UMB
+DOSDATA=UMB
+REM Instructs EMS page registers to map first 4 pages into frame
+REM place in file before use!umb.sys or other memory manager!
+device=c:\tandy\ems2umb.exe
+# Fixes VGA detection issues
+device=c:\tandy\vgafudge.exe
+REM Declare EMS page frame at E000 as part of UMB. 160k total.
+device=c:\tandy\use!umbs.sys C800-EFFF
+device=c:\tandy\dosmax.exe /P:-
+DEVICEHIGH=C:\DOS\SETVER.EXE
+SHELL=C:\COMMAND.COM C:\ /e:512 /P /H
+devicehigh=c:\dos\ansi.sys
+REM REMEMBER! LOADING EMS DRIVER WILL TRASH YOUR UMB!
+
+[LOW]
+rem device=c:\tandy\ltemm.exe /p:E000
+DEVICE=C:\DOS\SETVER.EXE
+
