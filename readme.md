@@ -1,6 +1,6 @@
 # Paleozoic PC Stuff
 
-Random Retrocomputing things brought to you by the loser
+Random retrocomputing things brought to you by the loser
 who runs the Paleozoic PCs channel on Youtube.
 
 [Link](https://www.youtube.com/channel/UC8DxqCcs3MqUyXdEJHCd9vg)
@@ -31,7 +31,7 @@ Code compiled with MASM 6.0 on MS/PC-DOS.
 Note that VGAFUDGE is only set up to fix the data area for a color monitor. If
 you actually have a VGA mono monitor you can reference the source code for
 VGAFIX to compile a modified version. My assumption was that no one actually
-has a VGA Mono mono anymore.
+has a working mono VGA monitor anymore.
 
 ## EMS2UMB.EXE
 
