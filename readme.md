@@ -26,12 +26,20 @@ can't take credit for VGAFUDGE can be run either from the normal command line
 or configured as a device driver in config.sys.
 
 When run as a device driver no code remains resident, it simply runs and exits.
-Code compiled with MASM 6.0 on MS/PC-DOS.
+Simply place a DEVICE statement in config.sys before any drivers that may care
+about video card type.
 
-Note that VGAFUDGE is only set up to fix the data area for a color monitor. If
+Code was formatted for and compiled with MASM 6.0 on MS/PC-DOS. Note that
+VGAFUDGE is only set up to fix the data area for a color monitor. If
 you actually have a VGA mono monitor you can reference the source code for
-VGAFIX to compile a modified version. My assumption was that no one actually
-has a working mono VGA monitor anymore.
+VGAFIX to compile a modified version. (Simply change the byte poked into the
+BIOS data area appropriately.) My assumption was that no one actually
+has a working mono VGA monitor anymore which they care about using on a
+Tandy 1000.
+
+This software may also be useful on other machines; it appears, for instance,
+that the AT&T 6300 may also not set up the BIOS area correctly when fitted
+with a VGA card.
 
 ## EMS2UMB.EXE
 
