@@ -30,7 +30,7 @@ code    segment use16
 ;====================================== Device driver header
 ;
 header  dw      0ffffh, 0ffffh    ;Link to next driver
-        dw      1010000000000000b ;Driver attribute
+        dw      0000000000000000b ;Driver attribute
         dw      offset strategy   ;Pointer to strategy routine
                                   ;(first called)
         dw      offset interrupt  ;Pointer to interrupt routine
