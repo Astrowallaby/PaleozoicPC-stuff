@@ -77,11 +77,11 @@ bios extensions/cartridge images/whatever? (Memory should survive a warm reboot 
 
 ## RTL2UMB.EXE
 
-### Zero-resident enabler to use memory on an RTL8019A-based ethernet card as upper memory.
+### Zero-resident enabler to use memory on an RTL8019AS-based ethernet card as upper memory.
 
 Contributed by Davide Bresolin.
 
-The RTL8019A ethernet ASIC includes support for writeable flash/eeprom memory devices in the boot ROM socket.
+The RTL8019AS ethernet ASIC includes support for writeable flash/eeprom memory devices in the boot ROM socket.
 The signal to flash these devices is the same MEMW signal that RAM uses, so assuming the MEMW signal is
 actually connected to the socket (this may vary depending on the PCB board used on your particular card)
 this means it's possible to use a RAM chip in this socket as an upper memory block. However, there is
@@ -109,3 +109,5 @@ the kernel high. This decreased free conventional to 619K, or 615K with the pack
 The RTL card only controls chip select to the ROM socket, not the MEMR/MEMW signals, so presumably the issue 
 is the RTL gates itself on the AEN signal; this is common for port mapped devices but semi-erroneous to do
 for memory devices.
+
+It's unknown if this driver will work on other 8019 variants, it's only been tested on the 8019AS.
