@@ -1,5 +1,4 @@
 .8086 ; cpu type
-.model tiny ; tiny
 ;=======================================
 ; Program: ems2umb.asm
 ;
@@ -43,15 +42,8 @@ db_ptr  dw      0000h, 0000h      ;Address of device request header
 ;====================================== SYS Strategy proc
 ;
 strategy proc
-        push    ax
         mov     cs:db_ptr, bx     ;Set data block address in
         mov     cs:db_ptr+02h, es ;the DB_PTR variable
-;        mov     cs:rcs, cs
-;        mov     cs:rss, ss
-        mov     ax, sp
-        add     ax, 0004h
-;        mov     cs:rsp, ax
-        pop     ax
         retf
 strategy endp
 
@@ -71,9 +63,10 @@ interrupt proc
         push    cs                          ;Set data segment
         pop     ds
         les     di, dword ptr db_ptr        ;Data block address after ES:DI
-        mov     ax, 8003h                   ;executed by error
+        mov     ax, 8103h                   ;executed by error
         cmp     byte ptr es:[di+02h], 00h   ;Only INIT is permitted
         jne     intr_end                    ;Error --> Return to caller
+        mov     byte ptr es:[di+0dh], 0h    ;Say zero units
         mov     word ptr es:[di+0eh], 0000h ;Set end address of driver
         mov     es:[di+10h], cs
         push    es
@@ -81,8 +74,8 @@ interrupt proc
         call    sys_start                   ;Can only be function 00H
         pop     di
         pop     es
-intr_end:
         mov     ax, 0100h                   ;Return 'Operation Complete'
+intr_end:
         mov     es:[di+03h], ax             ;Set status field
         pop     es                          ;Restore registers
         pop     ds
