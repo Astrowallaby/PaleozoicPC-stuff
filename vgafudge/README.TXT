@@ -4,7 +4,7 @@ This program is only does one thing: when run it pokes a couple bytes into the D
 into the location where programs that attempt to autodetect what type of video card is installed
 to ensure that it returns the value expected for a machine fitted with a VGA card and color monitor.
 
-The reason this exists is older Tandy 1000 models that "support" being upgraded to VGA cards to not
+The reason this exists is older Tandy 1000 models that "support" being upgraded to VGA cards do not
 properly set this memory location. DOS programs that are specifically configured for the desired
 video mode will usually work regardless of this problem, but some programs and drivers that
 attempt to suss out themselves what video type is installed will guess incorrectly. This problem
