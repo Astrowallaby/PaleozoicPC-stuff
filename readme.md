@@ -111,3 +111,37 @@ is the RTL gates itself on the AEN signal; this is common for port mapped device
 for memory devices.
 
 It's unknown if this driver will work on other 8019 variants, it's only been tested on the 8019AS.
+
+## DACPOUND.EXE
+
+### Test your VGA card for "Palette Snow"
+
+Some people have noticed "snow" in the form of dark/light/colored artifacts appearing on the
+screen when running their favorite VGA games on original hardware. The most likely cause of
+these affects is "DAC Snow", which is the result of hardware contention between the video
+output circuitry and the CPU when the palette register contents are updated. (Palette cycling
+is commonly employed in VGA games to perform fade transitions or provide simple pseudo-animation
+effects.)
+
+Not all DACs are prone to this, most newer cards employ DACs with "dual-ported" memory
+that can be accessed and updated at the same time, but on older DACs there can be moments where
+the output circuitry is blocked from accessing the memory as the CPU writes it, resulting in
+a small dot or dash on the screen. Also, some programs only access the DAC during the vertical
+refresh period between frames to avoid this problems, so snow may not be apparent even if
+the card is prone to it. But if you've noticed these sort of artifacts when running *certain*
+games this program may help you verify that there isn't a bigger problem with your system's
+hardware or software.
+
+DACPOUND sets up a simple color bar display and drops into a tight loop rolling
+the palette registers corresponding to a set of grayscale bars near the middle of the screen.
+Video memory is completely untouched during this display, the only thing being exercised
+is the I/O mapped palette registers. Run the program and visually observe if any "snow" is
+generated; if the only activity visible is the cycling gray bars then your DAC is immune, while
+random artifacts appearing in the portions of the screen that should be stable indicate
+your DAC isn't dual ported. (Which may be good news, it means your VGA card is otherwise OK.
+DAC snow is completely normal for older cards.) Hit ESC to exit.
+
+This program was written in Microsoft QBasic/QuickBasic, and the .EXE file was compiled with
+QuickBasic 4.5. The interpreted .BAS file may be too slow to generate significant snow
+unless you have a quite fast computer, but the compiled version generates copius snow
+even on a 4.77mhz XT-class machine.
